@@ -1,6 +1,6 @@
 # lottie_animations
 
-Explore lottie aimations for flutter.
+Explore lottie animations for flutter.
 
 ## Getting Started
 
