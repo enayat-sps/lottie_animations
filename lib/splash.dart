@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import '../data/provider/users_provider.dart';
+
 import '../config/constants/assets_path.dart';
+import '../data/provider/users_provider.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -22,15 +22,14 @@ class _SplashState extends State<Splash> {
     //   },
     // );
     loadNewPage();
-
   }
-  loadNewPage()async{
+
+  loadNewPage() async {
     final userProvider = context.read<UsersProvider>();
     await userProvider.getUsers();
-    if(!mounted)return;
-    if(userProvider.isLoading==false) {
-       Navigator.pushNamedAndRemoveUntil(
-          context, 'home', (route) => false);
+    if (!mounted) return;
+    if (userProvider.isLoading == false) {
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
 
