@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "lottie_animations" "\0"
+            VALUE "FileDescription", "Lottie Animations" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lottie_animations" "\0"
+            VALUE "InternalName", "Lottie Animations" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "lottie_animations.exe" "\0"
-            VALUE "ProductName", "lottie_animations" "\0"
+            VALUE "ProductName", "Lottie Animations" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
