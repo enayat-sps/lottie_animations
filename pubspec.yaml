@@ -47,6 +47,8 @@ dependencies:
   flutter_launcher_icons: ^0.12.0
   auto_animated: ^3.1.0
   rive: ^0.10.2
+  image_picker: ^0.8.7+1
+  file_picker: ^5.2.6
 
 flutter_native_splash:
   color: "#FFFFFF"
@@ -83,7 +85,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   json_serializable: ^6.6.1
   build_runner: ^2.3.3
-  retrofit_generator: ^5.0.0
+  retrofit_generator: ^6.0.0+1
   freezed: ^2.3.2
 
 # For information on the generic Dart part of this file, see the

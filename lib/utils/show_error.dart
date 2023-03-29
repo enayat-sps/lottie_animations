@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lottie_animations/config/constants/assets_path.dart';
+
+import '../config/constants/assets_path.dart';
 
 class ShowError extends StatelessWidget {
   const ShowError({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class ShowError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Lottie.asset(AssetPath.errorAnimation),
+      child: Lottie.asset(AssetPathLottie.errorAnimation),
     );
   }
 }

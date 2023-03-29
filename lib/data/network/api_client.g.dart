@@ -21,11 +21,17 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<UsersModel> getUsers() async {
+  Future<UsersModel> getUsers(
+    page,
+    perPage,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'per_page': perPage,
+    };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<UsersModel>(Options(
       method: 'GET',
@@ -35,6 +41,29 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UsersModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UsersModel> getSingleUser(userID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UsersModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users${userID}',
               queryParameters: queryParameters,
               data: _data,
             )

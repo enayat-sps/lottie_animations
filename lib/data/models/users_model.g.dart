@@ -12,7 +12,7 @@ UsersModel _$UsersModelFromJson(Map<String, dynamic> json) => UsersModel(
       total: json['total'] as int?,
       totalPages: json['total_pages'] as int?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -25,7 +25,7 @@ Map<String, dynamic> _$UsersModelToJson(UsersModel instance) =>
       'data': instance.data,
     };
 
-Data _$DataFromJson(Map<String, dynamic> json) => Data(
+UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: json['id'] as int?,
       email: json['email'] as String?,
       firstName: json['first_name'] as String?,
@@ -33,7 +33,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       avatar: json['avatar'] as String?,
     );
 
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
+Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
       'first_name': instance.firstName,

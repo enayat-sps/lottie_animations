@@ -5,9 +5,9 @@ import 'package:lottie/lottie.dart';
 
 import '../config/constants/assets_path.dart';
 import '../config/constants/constants.dart';
-import '../data/provider/providers.dart';
-import '../utils/loader.dart';
+import '../data/provider/river_providers.dart';
 import '../utils/show_error.dart';
+import '../utils/show_loader.dart';
 
 class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class Home extends ConsumerWidget {
                                   ),
                                   onBackgroundImageError:
                                       (exception, stackTrace) {
-                                    Lottie.asset(AssetPath.errorAnimation);
+                                    Lottie.asset(AssetPathLottie.errorAnimation);
                                   },
                                   radius: 50,
                                 ),
@@ -98,7 +98,7 @@ class Home extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) => const ShowError(),
-        loading: () => const Loader(),
+        loading: () => const ShowLoader(),
       ),
     );
   }

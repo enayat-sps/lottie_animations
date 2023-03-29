@@ -8,10 +8,11 @@ import '../state/user_state.dart';
 class UserNotifier extends StateNotifier<UserState> {
   final _client = ApiClient(dioClient());
   UserNotifier(super.state);
-  getUserData() async {
+
+  getUserData(int page, int perPage) async {
     try {
       state = const UserState.loading();
-      final userData = await _client.getUsers();
+      final userData = await _client.getUsers(page, perPage);
       state = UserState.loaded(userData);
     } catch (error) {
       debugPrint(error.toString());

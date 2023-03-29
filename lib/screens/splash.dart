@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lottie_animations/data/provider/providers.dart';
+import 'package:lottie_animations/data/provider/river_providers.dart';
 
 import '../../config/constants/assets_path.dart';
 import '../screens/home.dart';
@@ -24,7 +24,7 @@ class _SplashState extends ConsumerState<Splash> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen.withScreenFunction(
-      splash: Lottie.asset(AssetPath.colorLoaderAnimation),
+      splash: Lottie.asset(AssetPathLottie.colorLoaderAnimation),
       splashIconSize: 200,
       screenFunction: () async {
         return const Home();

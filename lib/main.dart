@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie_animations/screens/image_editing_screen.dart';
 
 import '../config/constants/constants.dart';
 import '../screens/error_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => const Splash(),
+        '/': (context) => const ImageEditingScreen(),
         'home': (context) => const Home(),
         'error': (context) => const ErrorScreen(),
       },

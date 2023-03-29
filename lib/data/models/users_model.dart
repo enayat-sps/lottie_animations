@@ -10,7 +10,7 @@ class UsersModel {
   final int? total;
   @JsonKey(name: 'total_pages')
   final int? totalPages;
-  final List<Data>? data;
+  final List<UserData>? data;
 
   const UsersModel({
     this.page,
@@ -27,7 +27,7 @@ class UsersModel {
 }
 
 @JsonSerializable()
-class Data {
+class UserData {
   final int? id;
   final String? email;
   @JsonKey(name: 'first_name')
@@ -36,7 +36,7 @@ class Data {
   final String? lastName;
   final String? avatar;
 
-  const Data({
+  const UserData({
     this.id,
     this.email,
     this.firstName,
@@ -44,7 +44,7 @@ class Data {
     this.avatar,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }

@@ -11,5 +11,13 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @GET(Endpoints.users)
-  Future<UsersModel> getUsers();
+  Future<UsersModel> getUsers(
+    @Query(Endpoints.pageQuery) int page,
+    @Query(Endpoints.perPageQuery) int perPage,
+  );
+
+  @GET('${Endpoints.users}{${Endpoints.userIdPath}}')
+  Future<UsersModel> getSingleUser(
+    @Path(Endpoints.userIdPath) int userID,
+  );
 }
