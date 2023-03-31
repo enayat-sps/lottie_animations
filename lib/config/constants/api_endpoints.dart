@@ -15,5 +15,5 @@ class Endpoints {
   ///queries
   static const pageQuery = 'page';
   static const perPageQuery = 'per_page';
-  static const userIdPath = '/userID';
+  static const userIdPath = 'userID';
 }

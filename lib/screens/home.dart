@@ -2,6 +2,7 @@ import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:lottie_animations/config/routes/routes.dart';
 
 import '../config/constants/assets_path.dart';
 import '../config/constants/constants.dart';
@@ -39,6 +40,7 @@ class Home extends ConsumerWidget {
       appBar: AppBar(),
       body: userData.when(
         data: (data) {
+          /// assigning async data to a variable
           final user = data?.data;
           return LiveList.options(
             itemCount: user?.length ?? 0,
@@ -60,32 +62,40 @@ class Home extends ConsumerWidget {
                       horizontal: 20,
                     ),
                     child: SizedBox(
-                      child: Card(
-                        elevation: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () =>
-                                    Navigator.of(context).pushNamed('error'),
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    user![index].avatar!,
+                      child: InkWell(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          RoutePaths.userDetailScreen,
+                          arguments: user[index].id,
+                        ),
+                        child: Card(
+                          elevation: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => Navigator.of(context)
+                                      .pushNamed(RoutePaths.errorScreen),
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      user![index].avatar!,
+                                    ),
+                                    onBackgroundImageError:
+                                        (exception, stackTrace) {
+                                      Lottie.asset(
+                                          AssetPathLottie.errorAnimation);
+                                    },
+                                    radius: 50,
                                   ),
-                                  onBackgroundImageError:
-                                      (exception, stackTrace) {
-                                    Lottie.asset(AssetPathLottie.errorAnimation);
-                                  },
-                                  radius: 50,
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              Text('$firstNameText${user[index].firstName!}'),
-                              Text('$lastNameText ${user[index].lastName!}'),
-                              Text('$emailText ${user[index].email!}'),
-                              Text('$userIdText${user[index].id!}'),
-                            ],
+                                const SizedBox(height: 10),
+                                Text('$firstNameText${user[index].firstName!}'),
+                                Text('$lastNameText ${user[index].lastName!}'),
+                                Text('$emailText ${user[index].email!}'),
+                                Text('$userIdText${user[index].id!}'),
+                              ],
+                            ),
                           ),
                         ),
                       ),

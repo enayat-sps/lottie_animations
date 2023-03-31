@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie_animations/screens/image_editing_screen.dart';
 
 import '../config/constants/constants.dart';
+import '../config/routes/routes.dart';
 import '../screens/error_screen.dart';
 import '../screens/home.dart';
+import '../screens/image_editing_screen.dart';
 import '../screens/splash.dart';
+import '../screens/user_detail_screen.dart';
 
 void main() {
   runApp(
@@ -26,9 +28,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => const ImageEditingScreen(),
-        'home': (context) => const Home(),
-        'error': (context) => const ErrorScreen(),
+        '/': (context) => const Splash(),
+        RoutePaths.homeScreen: (context) => const Home(),
+        RoutePaths.errorScreen: (context) => const ErrorScreen(),
+        RoutePaths.userDetailScreen: (context) => const UserDetailScreen(),
+        RoutePaths.imageEditingScreen: (context) => const ImageEditingScreen(),
       },
     );
   }

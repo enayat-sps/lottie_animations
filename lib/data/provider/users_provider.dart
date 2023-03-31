@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lottie_animations/data/network/dio_client.dart';
 
+import '/data/models/user.dart';
 import '/data/models/users_model.dart';
-import '/data/network/api_client.dart';
+import '../services/api_client.dart';
+import '../services/dio_client.dart';
 
 class UsersProvider extends ChangeNotifier {
   UsersModel? users;
+  User? user;
   final client = ApiClient(dioClient());
   bool isLoading = false;
 
@@ -22,11 +24,10 @@ class UsersProvider extends ChangeNotifier {
     });
   }
 
-
   getSingleUser(int userID) async {
     isLoading = true;
     await client.getSingleUser(userID).then((value) {
-      users = value;
+      user = value;
       isLoading = false;
       notifyListeners();
     }).catchError((error) {

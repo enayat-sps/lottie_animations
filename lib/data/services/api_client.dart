@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:lottie_animations/config/constants/api_endpoints.dart';
+import 'package:lottie_animations/data/models/user.dart';
+import 'package:lottie_animations/data/models/users_model.dart';
 import 'package:retrofit/retrofit.dart';
-
-import '../../config/constants/api_endpoints.dart';
-import '../models/users_model.dart';
 
 part 'api_client.g.dart';
 
@@ -16,8 +16,8 @@ abstract class ApiClient {
     @Query(Endpoints.perPageQuery) int perPage,
   );
 
-  @GET('${Endpoints.users}{${Endpoints.userIdPath}}')
-  Future<UsersModel> getSingleUser(
-    @Path(Endpoints.userIdPath) int userID,
+  @GET('${Endpoints.users}/${Endpoints.userIdPath}')
+  Future<User> getSingleUser(
+    @Path(Endpoints.userIdPath) int userid,
   );
 }

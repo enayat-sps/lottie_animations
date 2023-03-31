@@ -5,8 +5,9 @@ import 'package:file_picker/file_picker.dart';
 // ignore: unnecessary_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/utils.dart';
 import 'package:image/image.dart' as image;
-import 'package:lottie_animations/utils/show_loader.dart';
+import 'package:lottie_animations/utils/loader_rive.dart';
 
 class ImageEditingScreen extends StatefulWidget {
   const ImageEditingScreen({Key? key}) : super(key: key);
@@ -16,9 +17,11 @@ class ImageEditingScreen extends StatefulWidget {
 }
 
 class _ImageEditingScreenState extends State<ImageEditingScreen> {
-  bool _showProgress = false;
+  bool _showLoading = false;
   Uint8List? _image;
   Uint8List? _originalImage;
+  final List<Uint8List?> _backupImagesList = [];
+  int _currentIndex = 0;
 
   void _showImagePicker() async {
     final result = await FilePicker.platform.pickFiles(type: FileType.image);
@@ -29,35 +32,40 @@ class _ImageEditingScreenState extends State<ImageEditingScreen> {
     if (path == null) return;
 
     setState(() {
-      _showProgress = true;
+      _showLoading = true;
     });
     final image = await File(path).readAsBytes();
     setState(() {
       _image = image;
       _originalImage = image;
-      _showProgress = false;
+      _backupImagesList.add(image);
+      _showLoading = false;
     });
   }
 
   void _applySepia() async {
     setState(() {
-      _showProgress = true;
+      _showLoading = true;
     });
     final image = await compute(_sepiaFilter, _image!);
     setState(() {
       _image = image;
-      _showProgress = false;
+      _backupImagesList.add(image);
+      _currentIndex++;
+      _showLoading = false;
     });
   }
 
-  void _applyGamma() async {
+  void _applyBlur() async {
     setState(() {
-      _showProgress = true;
+      _showLoading = true;
     });
     final image = await compute(_blurFilter, _image!);
     setState(() {
       _image = image;
-      _showProgress = false;
+      _backupImagesList.add(image);
+      _currentIndex++;
+      _showLoading = false;
     });
   }
 
@@ -87,6 +95,20 @@ class _ImageEditingScreenState extends State<ImageEditingScreen> {
     });
   }
 
+  void _undo() {
+    print(_currentIndex);
+    printStatus('Backup list length: ${_backupImagesList.length}');
+    if (_currentIndex > 0) {
+      _backupImagesList.removeAt(_currentIndex);
+      _currentIndex--;
+      setState(() {
+        _image = _backupImagesList[_currentIndex];
+      });
+    }
+    print(_currentIndex);
+    printStatus('Backup list length: ${_backupImagesList.length}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,30 +121,34 @@ class _ImageEditingScreenState extends State<ImageEditingScreen> {
             Center(
               child: Image.memory(_image!, gaplessPlayback: true),
             ),
-          if (_showProgress) ...[
-            const ShowLoader(),
+          if (_showLoading) ...[
+            const LoaderRive(),
           ],
         ],
       ),
       persistentFooterButtons: <Widget>[
         TextButton(
-          onPressed: !_showProgress && _image == null ? _showImagePicker : null,
+          onPressed: !_showLoading && _image == null ? _showImagePicker : null,
           child: const Text('Load'),
         ),
         TextButton(
-          onPressed: !_showProgress && _image != null ? _applySepia : null,
+          onPressed: !_showLoading && _image != null ? _applySepia : null,
           child: const Text('Sepia'),
         ),
         TextButton(
-          onPressed: !_showProgress && _image != null ? _applyGamma : null,
+          onPressed: !_showLoading && _image != null ? _applyBlur : null,
           child: const Text('Blur'),
         ),
         TextButton(
-          onPressed: !_showProgress && _image != _originalImage ? _reset : null,
+          onPressed: !_showLoading && _image != _originalImage ? _undo : null,
+          child: const Text('Undo'),
+        ),
+        TextButton(
+          onPressed: !_showLoading && _image != _originalImage ? _reset : null,
           child: const Text('Reset'),
         ),
         TextButton(
-          onPressed: !_showProgress && _image != null ? _clear : null,
+          onPressed: !_showLoading && _image != null ? _clear : null,
           child: const Text('Clear'),
         ),
       ],

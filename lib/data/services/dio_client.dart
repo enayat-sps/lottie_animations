@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+
 import 'package:lottie_animations/config/constants/api_endpoints.dart';
+
 
 Dio dioClient() {
   final dio = Dio();

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../network/api_client.dart';
-import '../network/dio_client.dart';
+import '../services//api_client.dart';
+import '../services//dio_client.dart';
 import '../state/user_state.dart';
 
 class UserNotifier extends StateNotifier<UserState> {

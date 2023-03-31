@@ -7,8 +7,11 @@ class AssetPathLottie {
 }
 
 class AssetPathRive {
-  static const loadingAnimation = 'assets/animations/loading.riv';
+  static const loadingAnimation = 'assets/animations/loader2.riv';
   static const searchBarIcon = 'assets/animations/search.riv';
+  static const failedAnimation = 'assets/animations/failed.riv';
+  static const successAnimation = 'assets/animations/success.riv';
+  static const loginAnimation = 'assets/animations/loginAnimation.riv';
 }
 
 class AssetPathImages {

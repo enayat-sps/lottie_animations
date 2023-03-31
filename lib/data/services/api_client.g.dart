@@ -50,25 +50,25 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<UsersModel> getSingleUser(userID) async {
+  Future<User> getSingleUser(userid) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UsersModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/users${userID}',
+              '/users/userID',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UsersModel.fromJson(_result.data!);
+    final value = User.fromJson(_result.data!);
     return value;
   }
 

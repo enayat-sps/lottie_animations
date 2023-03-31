@@ -2,10 +2,10 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lottie_animations/data/provider/river_providers.dart';
 
 import '../../config/constants/assets_path.dart';
-import '../screens/home.dart';
+import '../data/provider/river_providers.dart';
+import '../screens/auth_screen.dart';
 
 class Splash extends ConsumerStatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _SplashState extends ConsumerState<Splash> {
       splash: Lottie.asset(AssetPathLottie.colorLoaderAnimation),
       splashIconSize: 200,
       screenFunction: () async {
-        return const Home();
+        return const AuthScreen();
       },
     );
   }
